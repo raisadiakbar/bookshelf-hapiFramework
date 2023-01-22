@@ -1,5 +1,4 @@
 const {nanoid} = require('nanoid');
-const id = nanoid(16);
 const books = require('./book');
 
 const addBook = (request, h) => {
@@ -7,6 +6,7 @@ const addBook = (request, h) => {
   const finished = pageCount === readPage;
   const insertedAt = new Date().toISOString();
   const updatedAt = insertedAt;
+  const id = nanoid(16);
 
 
   // User tidak input name

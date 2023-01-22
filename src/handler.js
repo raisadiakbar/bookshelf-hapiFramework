@@ -69,7 +69,7 @@ const addBook = (request, h) => {
   // Buku gagal ditambahkan
   const response = h
     .response({
-      status: 'fail',
+      status: 'error',
       message: 'Buku gagal ditambahkan',
     })
     .code(500);

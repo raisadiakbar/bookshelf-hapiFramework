@@ -141,7 +141,7 @@ const getAll = (request, h) => {
 
   // kalau ada query finished
   const BooksFinished = books.filter(
-    (book) => Number(book.reading) === Number(finished),
+    (book) => Number(book.finished) === Number(finished),
   );
 
   const response = h
@@ -264,7 +264,8 @@ const deleteBook = (request, h) => {
   const { bookId } = request.params;
 
    // find book by id
-  const book = books.filter((n) => n.id === bookId)[0]; 
+  // const book = books.filter((n) => n.id === bookId)[0]; 
+  const book = books.findIndex((note) => note.id === bookId); 
 
   if (book !== -1) {
     books.splice(book, 1);

@@ -97,7 +97,7 @@ const getAll = (request, h) => {
   }
 
   if (name) {
-    const filteredBooksName = books.filter((book) => {
+    const BooksName = books.filter((book) => {
       const nameRegex = new RegExp(name, 'gi');
       return nameRegex.test(book.name);
     });
@@ -106,7 +106,7 @@ const getAll = (request, h) => {
       .response({
         status: 'success',
         data: {
-          books: filteredBooksName.map((book) => ({
+          books: BooksName.map((book) => ({
             id: book.id,
             name: book.name,
             publisher: book.publisher,
@@ -119,7 +119,7 @@ const getAll = (request, h) => {
   }
 
   if (reading) {
-    const filteredBooksReading = books.filter(
+    const BooksReading = books.filter(
       (book) => Number(book.reading) === Number(reading),
     );
 
@@ -127,7 +127,7 @@ const getAll = (request, h) => {
       .response({
         status: 'success',
         data: {
-          books: filteredBooksReading.map((book) => ({
+          books: BooksReading.map((book) => ({
             id: book.id,
             name: book.name,
             publisher: book.publisher,
@@ -140,15 +140,15 @@ const getAll = (request, h) => {
   }
 
   // kalau ada query finished
-  const filteredBooksFinished = books.filter(
-    (book) => Number(book.finished) === Number(finished),
+  const BooksFinished = books.filter(
+    (book) => Number(book.reading) === Number(finished),
   );
 
   const response = h
     .response({
       status: 'success',
       data: {
-        books: filteredBooksFinished.map((book) => ({
+        books: BooksFinished.map((book) => ({
           id: book.id,
           name: book.name,
           publisher: book.publisher,
@@ -264,10 +264,10 @@ const deleteBook = (request, h) => {
   const { bookId } = request.params;
 
    // find book by id
-  const index = books.findIndex((note) => note.id === bookId);
+  const book = books.filter((n) => n.id === bookId)[0]; 
 
-  if (index !== -1) {
-    books.splice(index, 1);
+  if (book !== -1) {
+    books.splice(book, 1);
 
     // Bila id buku berhasil dihapus
     const response = h
